@@ -16,4 +16,30 @@ CREATE TABLE products (
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("", "", "", ,);
--- need to add 10 mock products here -- 
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("", "", "", ,);
