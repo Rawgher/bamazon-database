@@ -11,7 +11,9 @@ CREATE TABLE products (
      
      price INTEGER(10) NOT NULL,
      
-     stock_quantity INTEGER(10) NOT NULL
+     stock_quantity INTEGER(10) NOT NULL,
+     
+     PRIMARY KEY (id)
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
