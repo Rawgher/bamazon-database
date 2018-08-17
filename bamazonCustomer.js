@@ -18,6 +18,20 @@ var connection = mysql.createConnection({
 });
 
 
+connection.connect(function(err) {
+    if (err) throw err;
+    console.log("connected as id " + connection.threadId);
+    afterConnection();
+  });
+  
+  function afterConnection() {
+    connection.query("SELECT * FROM products", function(err, res) {
+      if (err) throw err;
+      console.log(res);
+      connection.end();
+    });
+  }
+
 // The first should ask them the ID of the product they would like to buy.
 // The second message should ask how many units of the product they would like to buy.
 
