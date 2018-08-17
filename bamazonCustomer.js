@@ -1,6 +1,21 @@
 // Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 // The app should then prompt users with two messages.
 
+var mysql = require("mysql");
+
+var connection = mysql.createConnection({
+  host: "localhost",
+
+  // Your port; if not 3306
+  port: 3306,
+
+  // Your username
+  user: "root",
+
+  // Your password
+  password: "root",
+  database: "bamazon_db"
+});
 
 
 // The first should ask them the ID of the product they would like to buy.
