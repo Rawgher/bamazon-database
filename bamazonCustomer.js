@@ -53,21 +53,20 @@ function start() {
           type: "list",
           choices: itemArray,
           message: "Please select the item id you are interested in!"
+        },
+        {
+          name: "buy",
+          type: "input",
+          message: "How many would you like to buy?"
         }
-      
-        // ,
-  //       {
-  //         name: "bid",
-  //         type: "input",
-  //         message: "How much would you like to bid?"
-  //       }
       ])
       .then(function(answer) {
         // get the information of the chosen item
-        var chosenItem;
-        for (var i = 0; i < results.length; i++) {
-          if (results[i].item_name === answer.choice) {
-            chosenItem = results[i];
+        var components = answer.choice.trim().split(':');
+        for (var k = 0; k < results.length; k++) {
+          // test if results id = the first element of the components array (ie: the id)
+          if (results[k].id === parseInt(components[0])) {
+            chosenItem = results[k];
           }
         }
       })
