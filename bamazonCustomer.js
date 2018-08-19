@@ -1,10 +1,11 @@
 // Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 
+var inquirer = require("inquirer");
 
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-  host: "local",
+  host: "localhost",
 
   // Your port; if not 3306
   port: 3306,
@@ -26,23 +27,91 @@ connection.connect(function(err) {
 
 // function which prompts the user for what action they should take
 function start() {
-  inquirer
-    .prompt({
-      name: "postOrBid",
-      type: "rawlist",
-      message: "Would you like to [POST] an auction or [BID] on an auction?",
-      choices: ["POST", "BID"]
+  
+  connection.query("SELECT * FROM products", function(err, results) {
+    if (err) throw err;
+
+    var choiceArray = [];
+    for (var i = 0; i < results.length; i++) {
+      // push into the array a string like this: "2: Car"
+      choiceArray.push(results[i].item_id + ": " + results[i].product_name);
+    }
+    
+    // once you have the items, prompt the user for which they'd like to bid on
+    inquirer
+      .prompt([
+        {
+          name: "choice",
+          type: "list",
+          choices: choiceArray,
+          message: "Here is what we have for sale. Please select an item!"
+        }
+      
+        // ,
+  //       {
+  //         name: "bid",
+  //         type: "input",
+  //         message: "How much would you like to bid?"
+  //       }
+      ])
+      .then(function(answer) {
+        // get the information of the chosen item
+        var chosenItem;
+        for (var i = 0; i < results.length; i++) {
+          if (results[i].item_name === answer.choice) {
+            chosenItem = results[i];
+          }
+        }
+      })
     })
-    .then(function(answer) {
-      // based on their answer, either call the bid or the post functions
-      if (answer.postOrBid.toUpperCase() === "POST") {
-        postAuction();
-      }
-      else {
-        bidAuction();
-      }
-    });
-}
+  }
+
+  //       // determine if bid was high enough
+  //       if (chosenItem.highest_bid < parseInt(answer.bid)) {
+  //         // bid was high enough, so update db, let the user know, and start over
+  //         connection.query(
+  //           "UPDATE auctions SET ? WHERE ?",
+  //           [
+  //             {
+  //               highest_bid: answer.bid
+  //             },
+  //             {
+  //               id: chosenItem.id
+  //             }
+  //           ],
+  //           function(error) {
+  //             if (error) throw err;
+  //             console.log("Bid placed successfully!");
+  //             start();
+  //           }
+  //         );
+  //       }
+  //       else {
+  //         // bid wasn't high enough, so apologize and start over
+  //         console.log("Your bid was too low. Try again...");
+  //         start();
+  //       }
+  //     });
+  // });
+  
+  
+  // inquirer
+  //   .prompt({
+  //     name: "postOrBid",
+  //     type: "rawlist",
+  //     message: "Here is what we have for sale. Please choose an item or you can exit the store.",
+  //     choices: ["POST", "BID"]
+  //   })
+  //   .then(function(answer) {
+  //     // based on their answer, either call the bid or the post functions
+  //     if (answer.postOrBid.toUpperCase() === "POST") {
+  //       postAuction();
+  //     }
+  //     else {
+  //       bidAuction();
+  //     }
+  //   });
+// }
 
 // function to handle posting new items up for auction
 function postAuction() {
