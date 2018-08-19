@@ -34,17 +34,25 @@ function start() {
     var choiceArray = [];
     for (var i = 0; i < results.length; i++) {
       // push into the array a string like this: "2: Car"
-      choiceArray.push(results[i].item_id + ": " + results[i].product_name);
+      choiceArray.push("Item Id: " + results[i].item_id + ", Item Name: " + results[i].product_name + ", $" + results[i].price);
     }
     
+    console.log("Here is everything we have for sale at Bamazon.")
+    console.log(choiceArray);
+    
+    var itemArray = [];
+    for (var j = 0; j < results.length; j++) {
+      // push into the array a string like this: "2: Car"
+      itemArray.push(results[j].item_id + ": " + results[j].product_name);
+    }
     // once you have the items, prompt the user for which they'd like to bid on
     inquirer
       .prompt([
         {
           name: "choice",
           type: "list",
-          choices: choiceArray,
-          message: "Here is what we have for sale. Please select an item!"
+          choices: itemArray,
+          message: "Please select the item id you are interested in!"
         }
       
         // ,
