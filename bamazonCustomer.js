@@ -94,16 +94,16 @@ function start() {
             connection.query(
               "UPDATE products SET ? WHERE ?", updateStock, function (error) {
                 if (error) throw error;
-                console.log("\nWe've received your order");
+                console.log("\nWe've received your order.");
               });
 
             let totalCost = parseInt(answer.buy) * chosenItem.price;
-            console.log("\nOur system shows that you have ordered " + answer.buy + " " + chosenItem.product_name + ".\nYour cart total was $" + totalCost);
+            console.log("\nOur system shows that you have ordered " + answer.buy + " " + chosenItem.product_name + ".\nYour cart total was $" + totalCost +".");
             connection.end()
           }
 
         } else {
-          console.log("\nYou need to choose a proper amount to buy. Try again")
+          console.log("\nYou need to choose a proper amount to buy. Try again.")
           connection.end()
         }
       })
