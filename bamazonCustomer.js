@@ -28,13 +28,15 @@ connection.connect(function (err) {
 });
 
 // function to display product id, name and price for the user
-function display () {
+function display() {
   connection.query("SELECT item_id, product_name, price FROM products", function (err, results) {
     if (err) throw err;
 
     console.log("\nHere is everything we have for sale at Bamazon.\n")
     console.table(results);
-});
+
+  });
+
 }
 
 // function which prompts the user for what action they would like to take
@@ -42,9 +44,6 @@ function start() {
 
   connection.query("SELECT * FROM products", function (err, results) {
     if (err) throw err;
-
-    // console.log("\nHere is everything we have for sale at Bamazon.\n")
-    // console.table(results);
 
     var itemArray = [];
     for (var j = 0; j < results.length; j++) {
