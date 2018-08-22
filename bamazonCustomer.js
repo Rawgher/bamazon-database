@@ -21,6 +21,7 @@ let connection = mysql.createConnection({
 connection.connect(function (err) {
 
   if (err) throw err;
+
   // run the start function after the connection is made to prompt the user
   display();
   start();
@@ -30,6 +31,7 @@ connection.connect(function (err) {
 // function to display product id, name and price for the user
 function display() {
   connection.query("SELECT item_id, product_name, price FROM products", function (err, results) {
+    
     if (err) throw err;
 
     console.log("\nHere is everything we have for sale at Bamazon.\n")
@@ -45,8 +47,8 @@ function start() {
   connection.query("SELECT * FROM products", function (err, results) {
     if (err) throw err;
 
-    var itemArray = [];
-    for (var j = 0; j < results.length; j++) {
+    let itemArray = [];
+    for (let j = 0; j < results.length; j++) {
 
       itemArray.push(results[j].item_id + ": " + results[j].product_name);
 
@@ -76,9 +78,9 @@ function start() {
 
           // get the information of the chosen item and store it
           let chosenItem;
-          var components = answer.choice.trim().split(':');
+          let components = answer.choice.trim().split(':');
 
-          for (var k = 0; k < results.length; k++) {
+          for (let k = 0; k < results.length; k++) {
 
             // test if results id = the first element of the components array (ie: the id)
             if (results[k].item_id === parseInt(components[0])) {
@@ -123,7 +125,25 @@ function start() {
 
             // calculating cost to user based off of how mnay products bought
             let totalCost = parseInt(answer.buy) * chosenItem.price;
-            console.log("\nOur system shows that you have ordered " + answer.buy + " " + chosenItem.product_name + ".\nYour cart total was $" + totalCost + ".\n");
+            console.log("\nOur system shows that you have ordered " + answer.buy + " " + chosenItem.product_name + ".\nYour cart total was $" + totalCost.toFixed(2) + ".\n");
+
+            let newSales = chosenItem.product_sales + totalCost;
+
+            let updateSales = [
+              {
+                product_sales: newSales
+              },
+              {
+                item_id: components[0]
+              }
+            ];
+
+            connection.query("UPDATE products SET ? WHERE ?", updateSales, function (error) {
+
+              if (error) throw error;
+
+            });
+            
             connection.end()
 
           };
