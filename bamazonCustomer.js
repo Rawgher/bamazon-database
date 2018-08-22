@@ -27,6 +27,7 @@ connection.connect(function (err) {
 
 });
 
+// function to display product id, name and price for the user
 function display () {
   connection.query("SELECT item_id, product_name, price FROM products", function (err, results) {
     if (err) throw err;
