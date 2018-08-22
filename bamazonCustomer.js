@@ -22,9 +22,19 @@ connection.connect(function (err) {
 
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
+  display();
   start();
 
 });
+
+function display () {
+  connection.query("SELECT item_id, product_name, price FROM products", function (err, results) {
+    if (err) throw err;
+
+    console.log("\nHere is everything we have for sale at Bamazon.\n")
+    console.table(results);
+});
+}
 
 // function which prompts the user for what action they would like to take
 function start() {
@@ -32,8 +42,8 @@ function start() {
   connection.query("SELECT * FROM products", function (err, results) {
     if (err) throw err;
 
-    console.log("\nHere is everything we have for sale at Bamazon.\n")
-    console.table(results);
+    // console.log("\nHere is everything we have for sale at Bamazon.\n")
+    // console.table(results);
 
     var itemArray = [];
     for (var j = 0; j < results.length; j++) {
@@ -80,7 +90,7 @@ function start() {
           };
 
           // only runs if there is a there are not enough items in stock
-          if (parseInt(chosenItem.stock_quantity) < parseInt(answer.buy)) {
+          if (parseInt(chosenItem.stock_quantity) <= parseInt(answer.buy)) {
 
             console.log("\nWe do not have enough products in stock to match your order.\nPlease check back after we restock!");
             connection.end();
