@@ -195,7 +195,7 @@ function addProduct() {
         {
             name: "price",
             type: "input",
-            message: "How much does this item cost (to two decimal places)?"
+            message: "How much does this item cost?"
         },
         {
             name: "stock",
@@ -212,8 +212,9 @@ function addProduct() {
 
             product_name: answer.itemName,
             department_name: answer.departmentName,
-            price: parseFloat(answer.price),
-            stock_quantity: parseInt(answer.stock)
+            price: parseFloat(answer.price).toFixed(2),
+            stock_quantity: parseInt(answer.stock),
+            product_sales: 0
 
         };
 

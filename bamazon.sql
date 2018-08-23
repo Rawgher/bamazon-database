@@ -27,4 +27,11 @@ CREATE TABLE departments (
     
     PRIMARY KEY (department_id)
     
-    );
+);
+
+CREATE VIEW bamazon_db.TotalProfits AS
+SELECT d.department_id, p.department_name, d.over_head_cost, p.product_sales, SUM(p.product_sales) - d.over_head_cost AS total_profit
+FROM products p JOIN departments d
+ON p.department_name = d.department_name
+GROUP BY d.department_name
+ORDER BY d.department_name asc;

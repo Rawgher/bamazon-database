@@ -64,7 +64,15 @@ function start() {
 
 function productSales () {
 
-}
+
+    connection.query("SELECT * FROM totalprofits", function (error, results) {
+        if (error) throw error;
+        console.table(results);
+    });
+
+    connection.end();
+    
+};
 
 // function to add a new department
 function newDepartment () {
@@ -74,6 +82,11 @@ function newDepartment () {
             name: "departmentName",
             type: "input",
             message: "Please enter the department you want to add!"
+        },
+        {
+            name: "overhead",
+            type: "input",
+            message: "What is the overhead cost of this new department?"
         }
 
     ]).then(function (answer) {
@@ -84,7 +97,7 @@ function newDepartment () {
         var replacements = {
 
             department_name: answer.departmentName,
-            over_head_cost: 0
+            over_head_cost: answer.overhead
 
         };
 

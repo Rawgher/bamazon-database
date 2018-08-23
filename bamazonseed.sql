@@ -9,3 +9,9 @@ VALUES ("Xbox One", "Electronics", 399.99, 15, 0),
 ("Coding For Dummies", "Books", 19.99, 200, 0),
 ("Cracking the Coding Interview", "Books", 18.95, 20, 0),
 ("Bose Desk Speakers", "Electronics", 199.99, 20, 0);
+
+INSERT INTO bamazon_db.departments (department_name, over_head_cost)
+VALUES ("Electronics", 5000),
+("Pets", 1500),
+("Household Appliances", 1000),
+("Books", 200);
