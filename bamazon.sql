@@ -35,6 +35,6 @@ Create VIEW bamazon_db.sumtotal AS SELECT department_name, SUM(product_sales) AS
 CREATE VIEW bamazon_db.TotalProfits AS
 SELECT d.department_id, p.department_name, d.over_head_cost, c.total_product_sales, c.total_product_sales - d.over_head_cost AS total_profit
 FROM products p JOIN (departments d, sumtotal c) 
-ON p.department_name = d.department_name = c.sumtotal
+ON p.department_name = d.department_name AND p.department_name = c.department_name
 GROUP BY d.department_name
 ORDER BY d.department_name asc;
