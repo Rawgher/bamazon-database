@@ -1,9 +1,3 @@
-// view product sales by department
-// should show total profit (calculated from over head costs and product sales)
-// need a custom alias?
-
-
-
 // setting up required npms
 let inquirer = require("inquirer");
 
@@ -62,20 +56,22 @@ function start() {
 
 };
 
+// function that logs the totalprofits view to the console
 function productSales () {
 
-
     connection.query("SELECT * FROM totalprofits", function (error, results) {
+
         if (error) throw error;
         console.table(results);
-    });
+        start();
 
-    connection.end();
+    });
     
 };
 
 // function to add a new department
 function newDepartment () {
+
     inquirer.prompt([
 
         {
@@ -111,4 +107,5 @@ function newDepartment () {
         });
 
     });
+
 }
