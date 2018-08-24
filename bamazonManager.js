@@ -139,6 +139,7 @@ function addInv() {
                         chosenItem = results[k];
 
                     };
+                    
                 };
 
                 // setting up update of stock
