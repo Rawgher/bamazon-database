@@ -3,7 +3,7 @@ let inquirer = require("inquirer");
 
 let mysql = require("mysql");
 
-const cTable = require("console.table");
+let Table = require("cli-table");
 
 // setting up mySQL connection
 let connection = mysql.createConnection({
@@ -73,7 +73,30 @@ function forSale() {
 
         if (err) throw err;
         console.log("\nHere is everything currently on sale at Bamazon.\n")
-        console.table(results);
+
+        // setting up header of table
+        let table = new Table({
+
+            head: ["Item Id", "Product Name", "Department Name", "Price", "Stock", "Total Sales"],
+
+            style: {
+                head: ['white'],
+                compact: false,
+                colAligns: ["center"]
+            }
+
+        });
+
+        //looping through results to add them to the table
+        for (let i = 0; i < results.length; i++) {
+            table.push([results[i].item_id, results[i].product_name, results[i].department_name, "$" + results[i].price, results[i].stock_quantity, results[i].product_sales]);
+
+        }
+
+        // console logging the table
+        console.log(table.toString());
+
+
         start();
 
     });
@@ -86,8 +109,30 @@ function lowInv() {
     connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, results) {
 
         if (err) throw err;
-        console.log("\nHere are all items on Bamazon with that's stock is lower than 5.\n")
-        console.table(results);
+        console.log("\nHere are all items on Bamazon with stock lower than 5.\n")
+
+        // setting up header of table
+        let table = new Table({
+
+            head: ["Item Id", "Product Name", "Department Name", "Price", "Stock", "Total Sales"],
+
+            style: {
+                head: ['white'],
+                compact: false,
+                colAligns: ["center"]
+            }
+
+        });
+
+        //looping through results to add them to the table
+        for (let i = 0; i < results.length; i++) {
+            table.push([results[i].item_id, results[i].product_name, results[i].department_name, "$" + results[i].price, results[i].stock_quantity, results[i].product_sales]);
+
+        }
+
+        // console logging the table
+        console.log(table.toString());
+
         start();
 
     });
@@ -139,7 +184,7 @@ function addInv() {
                         chosenItem = results[k];
 
                     };
-                    
+
                 };
 
                 // setting up update of stock

@@ -3,7 +3,7 @@ let inquirer = require("inquirer");
 
 let mysql = require("mysql");
 
-const cTable = require("console.table");
+let Table = require("cli-table");
 
 //setting up mysql connection
 let connection = mysql.createConnection({
@@ -29,12 +29,34 @@ connection.connect(function (err) {
 
 // function to display product id, name and price for the user
 function display() {
+
   connection.query("SELECT item_id, product_name, price FROM products", function (err, results) {
-    
+
     if (err) throw err;
 
     console.log("\nHere is everything we have for sale at Bamazon.\n")
-    console.table(results);
+
+    // setting up header of table
+    let table = new Table({
+      
+      head: ["Item Id", "Product Name", "Price"],
+      
+      style: {
+        head: ['white'],
+        compact: false,
+        colAligns: ["center"]
+      }
+
+    });
+
+    //looping through results to add them to the table
+    for (let i = 0; i < results.length; i++) {
+      table.push([results[i].item_id, results[i].product_name, "$" + results[i].price]);
+
+    }
+
+    // console logging the table
+    console.log(table.toString());
 
   });
 
@@ -142,7 +164,7 @@ function start() {
               if (error) throw error;
 
             });
-            
+
             connection.end()
 
           };

@@ -3,7 +3,7 @@ let inquirer = require("inquirer");
 
 let mysql = require("mysql");
 
-const cTable = require("console.table");
+const Table = require("cli-table");
 
 // setting up mySQL connection
 let connection = mysql.createConnection({
@@ -62,7 +62,30 @@ function productSales () {
     connection.query("SELECT * FROM totalprofits", function (error, results) {
 
         if (error) throw error;
-        console.table(results);
+
+        console.log("\nHere are the total profits for each department!\n")
+
+        let table = new Table({
+
+            head: ["Department Id", "Department Name", "Overhead Cost", "Total Sales", "Total Profit"],
+
+            style: {
+                head: ['white'],
+                compact: false,
+                colAligns: ["center"]
+            }
+
+        });
+
+        //looping through results to add them to the table
+        for (let i = 0; i < results.length; i++) {
+            table.push([results[i].department_id, results[i].department_name, "$" + results[i].over_head_cost, "$" + results[i].total_product_sales, "$" + results[i].total_profit]);
+
+        }
+
+        // console logging the table
+        console.log(table.toString());
+
         start();
 
     });
