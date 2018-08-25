@@ -32,7 +32,7 @@ function start() {
 
         name: "supervisorOptions",
         type: "list",
-        message: "What would you like to do, supreme leader?",
+        message: "What would you like to do, supervisor?",
         choices: ["View Product Sales by Department", "Add a New Department", "Exit"]
 
     }).then(function (answers) {

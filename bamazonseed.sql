@@ -1,3 +1,4 @@
+-- Starter data to insert into products table --
 INSERT INTO bamazon_db.products (product_name, department_name, price, stock_quantity, product_sales)
 VALUES ("Xbox One", "Electronics", 399.99, 15, 0),
 ("Playstation 4", "Electronics", 299.99, 10, 0),
@@ -10,6 +11,7 @@ VALUES ("Xbox One", "Electronics", 399.99, 15, 0),
 ("Cracking the Coding Interview", "Books", 18.95, 20, 0),
 ("Bose Desk Speakers", "Electronics", 199.99, 20, 0);
 
+-- Starter data to insert into departments table -- 
 INSERT INTO bamazon_db.departments (department_name, over_head_cost)
 VALUES ("Electronics", 5000),
 ("Pets", 1500),

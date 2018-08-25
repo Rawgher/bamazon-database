@@ -1,7 +1,10 @@
+-- Creating new database --
 CREATE DATABASE bamazon_db;
 
+-- Telling sql to use this new database --
 USE bamazon_db;
 
+-- Setting up products table -- 
 CREATE TABLE products (
 	 item_id INT AUTO_INCREMENT NOT NULL,
 
@@ -18,6 +21,7 @@ CREATE TABLE products (
      PRIMARY KEY (item_id)
 );
 
+-- Setting up departments table --
 CREATE TABLE departments (
 	department_id INT AUTO_INCREMENT NOT NULL,
     
@@ -29,9 +33,10 @@ CREATE TABLE departments (
     
 );
 
-
+-- Making a view to store the total product sales for all departments to use in the view below --
 CREATE VIEW bamazon_db.sumtotal AS SELECT department_name, SUM(product_sales) AS total_product_sales FROM products GROUP BY department_name ORDER BY department_name;
 
+-- Making a view to show the total profits dynamically -- 
 CREATE VIEW bamazon_db.TotalProfits AS
 SELECT d.department_id, p.department_name, d.over_head_cost, c.total_product_sales, c.total_product_sales - d.over_head_cost AS total_profit
 FROM products p JOIN (departments d, sumtotal c) 
