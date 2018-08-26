@@ -26,7 +26,10 @@ This application allows the user (manager) to view all products for sale, view a
 The first two options provide tables for the user. When adding new stock to your current inventory, the user is prompted to select an item, and then provide the quantity that will be added. The last option, adding an entirely new item, will ask the user to provide an item name, department name, price and quanity. These changes will be reflected on the table from the view inventory option.
 
 ___
+<<<<<<< HEAD
 ## Supervisor
+=======
+>>>>>>> 8acc9751fbf1792d6a3787c97728083ec7c21933
 ![Bamazon Supervisor](./bamazonSupervisor.gif)
 
 ```node bamazonSupervisor.js```
