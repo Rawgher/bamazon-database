@@ -6,7 +6,7 @@ A npm package and seed file are provided for you to use. After downloading the r
 ___
 
 ## Customer
-![Bamazon Customer](./BamazonCustomer.gif)
+![Bamazon Customer](./bamazonCustomer.gif)
 
 ```node bamazonCustomer.js```
 
@@ -17,7 +17,7 @@ If the stock of the item selected is too low, it will notify the user and close 
 ___
 
 ## Manager
-![Bamazon Manager](./BamazonManager.gif)
+![Bamazon Manager](./bamazonManager.gif)
 
 ```node bamazonManager.js```
 
@@ -26,7 +26,8 @@ This application allows the user (manager) to view all products for sale, view a
 The first two options provide tables for the user. When adding new stock to your current inventory, the user is prompted to select an item, and then provide the quantity that will be added. The last option, adding an entirely new item, will ask the user to provide an item name, department name, price and quanity. These changes will be reflected on the table from the view inventory option.
 
 ___
-![Bamazon Supervisor](./BamazonSupervisor.gif)
+## Supervisor
+![Bamazon Supervisor](./bamazonSupervisor.gif)
 
 ```node bamazonSupervisor.js```
 
